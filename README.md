@@ -44,7 +44,7 @@ Acesta este un proiect care combină controlul unui brat robotic cu procesare de
    ffmpeg -i video.mp4 -f rawvideo -pix_fmt yuv420p - | python detectare_culori.py
    ```
 
-### Control brat robotic
+### Control braț robotic
    ```bash
    
    ```
