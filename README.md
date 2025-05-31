@@ -37,11 +37,11 @@ Acesta este un proiect care combină controlul unui brat robotic cu procesare de
 
 ### Detectare culori (cu OpenCV)
    ```bash
-   python detectie_culori.py
+   python detectare_culori.py
    ```
    *Asigură-te că scriptul primește input video în format YUV (I420) prin stdin – de exemplu:*
    ```bash
-   ffmpeg -i video.mp4 -f rawvideo -pix_fmt yuv420p - | python detectie_culori.py
+   ffmpeg -i video.mp4 -f rawvideo -pix_fmt yuv420p - | python detectare_culori.py
    ```
 
 ### Control brat robotic
