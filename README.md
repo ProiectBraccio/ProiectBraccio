@@ -1,14 +1,13 @@
 # ProiectBraccio
 
-# Proiect Raspberry Pi + Braț Robotic + Detecție culori
+# Proiect Raspberry Pi + Braț Robotic + Detecție litere
 
-Acesta este un proiect care combină controlul unui brat robotic cu procesare de imagine în timp real pe un Raspberry Pi. Proiectul integrează senzoristică, detecție de culori și control hardware. Are ca scop sortarea pe culori a unor cuburi.
-
+Acesta este un proiect care combină controlul unui brat robotic cu procesare de imagine în timp real pe un Raspberry Pi. Proiectul integrează senzoristică, detecție de litere și control hardware. Are ca scop realizarea unui rebus format dintr-un cuvânt unde brațul să așeze corespunzător literele
 ## Module ale proiectului
 
 - braț-robotic : cod și logică pentru controlul celor 6 servo-motoare ale bratului robotic Braccio
 - raspberry-pi: integrarea camerei și comunicarea serială cu Arduino
-- detecție-culori: detectarea obiectelor colorate din fluxuri video YUV folosind OpenCV
+- detecție-litere: detectarea literelor de pe cuburi din fluxuri video YUV folosind OpenCV
 - senzor ultrasonic : măsurare distanță cu senzor HC-SR04 (ultrasunete)
 - buton : activare ciclu de ridicare a cuburilor
 
@@ -18,6 +17,7 @@ Acesta este un proiect care combină controlul unui brat robotic cu procesare de
 - OpenCV
 - NumPy
 - Raspberry Pi
+- Arduino IDE- programare servomotoare robot
 - Servo-motoare, senzori, butoane (ultrasonic, cameră etc.)
 
 ## Cum pornești proiectul
