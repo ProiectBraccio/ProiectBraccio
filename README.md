@@ -21,8 +21,16 @@ Acest proiect implementează un robot care poate sorta litere în funcție de un
 ## Cerințe Software
 
 ### Dependințe Python
+**IMPORTANT**: Folosiți mediul virtual pentru a evita conflictele de dependințe:
 ```bash
-pip install opencv-python pytesseract pyserial tkinter numpy
+# Crearea mediului virtual
+python3 -m venv ~/PROIECTLITERE/venv
+
+# Activarea mediului virtual
+source ~/PROIECTLITERE/venv/bin/activate
+
+# Instalarea dependințelor în mediul virtual
+pip install opencv-python pytesseract pyserial numpy
 ```
 
 ### Tesseract OCR
@@ -39,7 +47,7 @@ sudo apt-get install libcamera-apps
 
 ```
 PROIECTLITERE/
-├── start_robot_system.sh          # Script principal de pornire
+├── start_system.sh          # Script principal de pornire
 ├── camera_detection.py      # Detectarea și recunoașterea literelor
 ├── interface_tkinter.py     # Interfața grafică
 ├── cuvant.txt              # Fișier temporar cu cuvântul de sortat
@@ -54,20 +62,39 @@ git clone <repository-url>
 cd robot-sortare-litere
 ```
 
-### 2. Instalarea dependințelor
+### 2. Crearea mediului virtual
 ```bash
-# Instalare dependințe Python
-pip install -r requirements.txt
+# Crearea mediului virtual pentru PROIECTLITERE
+python3 -m venv ~/PROIECTLITERE/venv
 
-# Instalare Tesseract OCR
+# Activarea mediului virtual
+source ~/PROIECTLITERE/venv/bin/activate
+
+# Verificarea că mediul virtual este activ
+which python3
+# Trebuie să afișeze: /home/[user]/PROIECTLITERE/venv/bin/python3
+```
+
+### 3. Instalarea dependințelor
+```bash
+# Asigurați-vă că mediul virtual este activ
+source ~/PROIECTLITERE/venv/bin/activate
+
+# Upgrade pip
+pip install --upgrade pip
+
+# Instalare dependințe Python în mediul virtual
+pip install opencv-python pytesseract pyserial numpy
+
+# Instalare Tesseract OCR (sistem)
 sudo apt-get update
-sudo apt-get install tesseract-ocr
+sudo apt-get install tesseract-ocr tesseract-ocr-ron
 
 # Pentru Raspberry Pi - instalare libcamera
 sudo apt-get install libcamera-apps
 ```
 
-### 3. Configurarea portului serial
+### 4. Configurarea portului serial
 Verificați și ajustați portul Arduino în `camera_detection.py`:
 ```python
 ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
@@ -78,17 +105,45 @@ Pentru a găsi portul corect:
 ls /dev/ttyACM* /dev/ttyUSB*
 ```
 
-### 4. Permisiuni pentru script
+### 5. Permisiuni pentru script
 ```bash
-chmod +x start_robot_system.sh
+chmod +x start_system.sh
+```
+
+### 6. Modificarea scriptului de pornire
+**IMPORTANT**: Editați `start_system.sh` pentru a activa mediul virtual:
+```bash
+#!/bin/bash
+
+echo "===== SISTEM ROBOT SORTARE LITERE ====="
+echo "Activez mediul virtual..."
+
+# Activarea mediului virtual
+source ~/PROIECTLITERE/venv/bin/activate
+
+echo "Pornirea componentelor..."
+
+if [ ! -d "$HOME/PROIECTLITERE" ]; then
+    echo "Creez folderul PROIECTLITERE..."
+    mkdir -p "$HOME/PROIECTLITERE"
+fi
+
+# Restul scriptului rămâne la fel...
 ```
 
 ## Utilizare
 
+### Activarea mediului virtual (înainte de fiecare utilizare)
+```bash
+source ~/PROIECTLITERE/venv/bin/activate
+```
+
 ### Pornirea sistemului
 ```bash
-./start_robot_system.sh
+./start_system.sh
 ```
+
+**NOTĂ**: Scriptul `start_system.sh` trebuie modificat pentru a activa automat mediul virtual (vezi secțiunea de instalare).
 
 ### Pași de funcționare:
 1. **Porniți sistemul** - Rulați scriptul principal
@@ -189,10 +244,20 @@ sudo usermod -a -G dialout $USER
 - Ajustați threshold-ul în cod
 - Asigurați-vă că literele sunt clare și mari
 
-#### 4. Dependințe lipsă
+#### 4. Dependințe lipsă sau probleme cu mediul virtual
 ```bash
-# Reinstalați dependințele
-pip install --force-reinstall opencv-python pytesseract pyserial
+# Verificați că mediul virtual este activ
+which python3
+# Trebuie să afișeze: /home/[user]/PROIECTLITERE/venv/bin/python3
+
+# Dacă mediul virtual nu este activ
+source ~/PROIECTLITERE/venv/bin/activate
+
+# Reinstalați dependințele în mediul virtual
+pip install --force-reinstall opencv-python pytesseract pyserial numpy
+
+# Verificați instalarea pytesseract
+python3 -c "import pytesseract; print('Pytesseract instalat cu succes')"
 ```
 
 ## Oprirea sistemului
@@ -203,7 +268,39 @@ pip install --force-reinstall opencv-python pytesseract pyserial
 
 ### Oprire forțată:
 ```bash
+# Dezactivarea mediului virtual
+deactivate
+
+# Oprirea proceselor
 pkill -f "python3 interface_tkinter.py"
 pkill -f "python3 camera_detection.py"
 ```
 
+## Dezvoltare și Personalizare
+
+### Modificarea parametrilor OCR:
+Editați în `camera_detection.py`:
+```python
+# Ajustați threshold-ul pentru procesarea imaginii
+_, thresh = cv2.threshold(gray, 130, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+
+# Modificați dimensiunile minime pentru detectarea contururilor
+if w > 60 and h > 60:
+```
+
+### Adăugarea de noi funcții:
+- Extindere pentru mai multe litere
+- Suport pentru cifre
+- Algoritmi de sortare mai complecși
+
+## Licență
+
+Acest proiect este disponibil sub licența MIT.
+
+## Autor
+
+Dezvoltat pentru proiectul de robotică - Sistemul de Sortare Automată a Literelor.
+
+---
+
+Pentru suport tehnic sau întrebări, vă rugăm să creați un issue în repository.
