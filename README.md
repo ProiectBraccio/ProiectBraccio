@@ -47,7 +47,7 @@ sudo apt-get install libcamera-apps
 
 ```
 PROIECTLITERE/
-├── start_system.sh          # Script principal de pornire
+├── start_robot_system.sh          # Script principal de pornire
 ├── camera_detection.py      # Detectarea și recunoașterea literelor
 ├── interface_tkinter.py     # Interfața grafică
 ├── cuvant.txt              # Fișier temporar cu cuvântul de sortat
@@ -107,28 +107,7 @@ ls /dev/ttyACM* /dev/ttyUSB*
 
 ### 5. Permisiuni pentru script
 ```bash
-chmod +x start_system.sh
-```
-
-### 6. Modificarea scriptului de pornire
-**IMPORTANT**: Editați `start_system.sh` pentru a activa mediul virtual:
-```bash
-#!/bin/bash
-
-echo "===== SISTEM ROBOT SORTARE LITERE ====="
-echo "Activez mediul virtual..."
-
-# Activarea mediului virtual
-source ~/PROIECTLITERE/venv/bin/activate
-
-echo "Pornirea componentelor..."
-
-if [ ! -d "$HOME/PROIECTLITERE" ]; then
-    echo "Creez folderul PROIECTLITERE..."
-    mkdir -p "$HOME/PROIECTLITERE"
-fi
-
-# Restul scriptului rămâne la fel...
+chmod +x start_robot_system.sh
 ```
 
 ## Utilizare
@@ -140,10 +119,8 @@ source ~/PROIECTLITERE/venv/bin/activate
 
 ### Pornirea sistemului
 ```bash
-./start_system.sh
+./start_robot_system.sh
 ```
-
-**NOTĂ**: Scriptul `start_system.sh` trebuie modificat pentru a activa automat mediul virtual (vezi secțiunea de instalare).
 
 ### Pași de funcționare:
 1. **Porniți sistemul** - Rulați scriptul principal
@@ -171,7 +148,7 @@ source ~/PROIECTLITERE/venv/bin/activate
 - Recunoașterea OCR cu Tesseract
 - Comunicarea cu Arduino
 
-### 3. Script Principal (`start_system.sh`)
+### 3. Script Principal (`start_robot_system.sh`)
 - Pornirea automată a tuturor componentelor
 - Gestionarea proceselor
 - Oprirea sigură a sistemului
@@ -275,32 +252,3 @@ deactivate
 pkill -f "python3 interface_tkinter.py"
 pkill -f "python3 camera_detection.py"
 ```
-
-## Dezvoltare și Personalizare
-
-### Modificarea parametrilor OCR:
-Editați în `camera_detection.py`:
-```python
-# Ajustați threshold-ul pentru procesarea imaginii
-_, thresh = cv2.threshold(gray, 130, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-
-# Modificați dimensiunile minime pentru detectarea contururilor
-if w > 60 and h > 60:
-```
-
-### Adăugarea de noi funcții:
-- Extindere pentru mai multe litere
-- Suport pentru cifre
-- Algoritmi de sortare mai complecși
-
-## Licență
-
-Acest proiect este disponibil sub licența MIT.
-
-## Autor
-
-Dezvoltat pentru proiectul de robotică - Sistemul de Sortare Automată a Literelor.
-
----
-
-Pentru suport tehnic sau întrebări, vă rugăm să creați un issue în repository.
