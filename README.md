@@ -1,6 +1,6 @@
 # ProiectBraccio
 
-# 🤖 Robot Sortare Litere cu Braț Robotic (Arduino + OCR + Tkinter)
+# Robot Sortare Litere cu Braț Robotic (Arduino + OCR + Tkinter)
 
 Un sistem robotizat integrat care **recunoaște, sortează și manipulează cuburi cu litere** folosind:
 - **Computer Vision + OCR**
@@ -11,13 +11,13 @@ Un sistem robotizat integrat care **recunoaște, sortează și manipulează cubu
 
 ---
 
-## 📦 Descriere Generală
+## Descriere Generală
 
 Sistemul detectează automat litere folosind camera și Tesseract OCR, primește un cuvânt de la utilizator și comandă brațul robotic să sorteze cuburile corespunzătoare literei în poziții dedicate. Confirmarea se face prin apăsarea unui buton fizic, doar dacă senzorul detectează prezența unui cub.
 
 ---
 
-## 🧱 Componente Hardware
+## Componente Hardware
 
 - Raspberry Pi / PC cu Linux
 - Cameră compatibilă `libcamera`
@@ -29,7 +29,7 @@ Sistemul detectează automat litere folosind camera și Tesseract OCR, primește
 
 ---
 
-## 🧰 Tehnologii
+## Tehnologii
 
 - **Python 3**: `opencv-python`, `pytesseract`, `tkinter`, `pyserial`, `sqlite3`
 - **C++ Arduino**: `Servo.h`, `Braccio.h`, `NewPing.h`
@@ -39,7 +39,7 @@ Sistemul detectează automat litere folosind camera și Tesseract OCR, primește
 
 ---
 
-## 🗂 Structura Proiectului
+## Structura Proiectului
 
 ```
 PROIECTLITERE/
@@ -53,7 +53,7 @@ PROIECTLITERE/
 
 ---
 
-## ⚙️ Instalare (Software)
+## Instalare (Software)
 
 ### 1. Activare mediu virtual
 ```bash
@@ -79,7 +79,7 @@ sudo apt-get install libcamera-apps
 
 ---
 
-## ⚙️ Configurare Arduino
+## Configurare Arduino
 
 ### Codul `robotic_arm_code.ino`:
 
@@ -103,7 +103,7 @@ if (Serial.available()) {
 
 ---
 
-## 🔌 Conexiuni Hardware Arduino
+## Conexiuni Hardware Arduino
 
 | Componentă        | Pin Arduino                      |
 |-------------------|----------------------------------|
@@ -114,7 +114,7 @@ if (Serial.available()) {
 
 ---
 
-## 🚀 Utilizare
+## Utilizare
 
 ### 1. Activare mediu virtual
 ```bash
@@ -135,7 +135,7 @@ source ~/PROIECTLITERE/venv/bin/activate
 
 ---
 
-## ✅ Reguli pentru cuvinte
+## Reguli pentru cuvinte
 
 - Doar **A-Z**, litere mari
 - **2 – 4 litere**, fără caractere repetate
@@ -143,7 +143,7 @@ source ~/PROIECTLITERE/venv/bin/activate
 
 ---
 
-## 🧠 Config OCR
+## Config OCR
 
 ```python
 ocr_config = '--psm 10 -c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -151,7 +151,7 @@ ocr_config = '--psm 10 -c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 ---
 
-## 🗃️ Baza de date (SQLite)
+## Baza de date (SQLite)
 
 Fișier: `robot_sortare.db`
 
@@ -165,7 +165,7 @@ CREATE TABLE cuvinte_sortate (
 
 ---
 
-## 🧪 Testare Cameră
+## Testare Cameră
 
 ```bash
 libcamera-hello
@@ -174,7 +174,7 @@ libcamera-vid -t 5000 --width 640 --height 480
 
 ---
 
-## 🧯 Troubleshooting
+## Troubleshooting
 
 ### Port serial indisponibil:
 ```bash
@@ -194,7 +194,7 @@ pip install --force-reinstall opencv-python pytesseract pyserial numpy
 
 ---
 
-## 🛑 Oprire sistem
+## Oprire sistem
 
 ### Normal:
 - `Ctrl+C` în terminal
@@ -208,14 +208,14 @@ pkill -f "python3 camera_detection.py"
 
 ---
 
-## 🔗 Comunicare cu Arduino
+## Comunicare cu Arduino
 
 - Comenzi de forma: `L1\n`, `L2\n`, ... până `L4\n`
 - Răspuns Arduino: `DONE\n` după mutarea cubului
 
 ---
 
-## 🎥 Demonstrație
+## Demonstrație
 
 [🔗 Vizualizează demo-ul video](https://drive.google.com/file/d/1nT6hrFQWlIjg--yZhD4qCPuB2gSUuGII/view?usp=drive_link)
 
