@@ -215,12 +215,6 @@ pkill -f "python3 camera_detection.py"
 
 ---
 
-## 📜 Licență
-
-Proiect educațional – utilizare liberă, cu menționarea sursei.
-
-
-
 ## 🎥 Demonstrație
 
 [🔗 Vizualizează demo-ul video](https://drive.google.com/file/d/1nT6hrFQWlIjg--yZhD4qCPuB2gSUuGII/view?usp=drive_link)
